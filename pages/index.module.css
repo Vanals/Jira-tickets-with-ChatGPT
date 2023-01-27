@@ -55,7 +55,7 @@
 .main input[type="submit"] {
   padding: 12px 0;
   color: #fff;
-  background-color: #10a37f;
+  background-color: rgb(39.1%, 45.6%, 96.4%);
   border: none;
   border-radius: 4px;
   text-align: center;
@@ -64,4 +64,15 @@
 .main .result {
   font-weight: bold;
   margin-top: 40px;
+  white-space: break-spaces;
+}
+
+.create-ticket-button {
+  padding: 12px;
+  color: #fff;
+  background-color: #10a37f;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
 }

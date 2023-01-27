@@ -15,11 +15,11 @@ export default async function (req, res) {
     return;
   }
 
-  const animal = req.body.animal || '';
-  if (animal.trim().length === 0) {
+  const ticketDescription = req.body.ticketDescription || '';
+  if (ticketDescription.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid animal",
+        message: "Please enter a valid Ticket description",
       }
     });
     return;
@@ -28,9 +28,11 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(animal),
+      prompt: generatePrompt(ticketDescription),
       temperature: 0.6,
+      max_tokens: 2000,
     });
+    console.log(completion.data, '🔥')
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
@@ -48,15 +50,33 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(animal) {
-  const capitalizedAnimal =
-    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `Suggest three names for an animal that is a superhero.
+function generatePrompt(ticketDescription) {
+  return `Based on the following description
+    
+    ${ticketDescription}
+  
+    Create a Jira ticket text.
+    It should contain a title.
+    It should contain a Description section. Explaining what needs to be created, why, benefits, use cases.
+    It should contain a requirements section. The requirement section should contain which props the ReactJs component might need, their typescript type, and what the component user needs them for.
+    
+    Should also contain, which HTML tags should the component be composed by, following semantic HTML.
+    For each tag specify which HTML attributes they need to function and be accessible based on WCAG 2.0 guidelines.
+    Describe what each attribute is for.
 
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: ${capitalizedAnimal}
-Names:`;
+    If you have  any extra Accessibility recommendation ad an Accessibility section.
+    If you have  any extra SEO recommendation ad an SEO section.
+
+    Add an HTML example of the component based on best practices.
+    
+    It should contain a design section asking to add the related design and stating that they should be followed to create the component
+
+    It should contain an  Acceptance Criteria section, summarizing what needs to be achieved to consider the ticket done
+   
+    It should contain a Supporting information section, and fill it in if supporting information are given in the description.
+    It should contain a Dependencies section, and fill it in if supporting information are given in the description.
+
+
+    If is a component what is being requested, bare in mind we write in ReactJS.
+`;
 }

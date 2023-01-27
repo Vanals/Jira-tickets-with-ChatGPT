@@ -1,41 +1,20 @@
-# OpenAI API Quickstart - Node.js example app
+# Create Jira Tickets with ChatGPT
 
-This is an example pet name generator app used in the OpenAI API [quickstart tutorial](https://beta.openai.com/docs/quickstart). It uses the [Next.js](https://nextjs.org/) framework with [React](https://reactjs.org/). Check out the tutorial or follow the instructions below to get set up.
 
-## Setup
 
-1. If you don’t have Node.js installed, [install it from here](https://nodejs.org/en/) (Node.js version >= 14.6.0 required)
+Application Created on top of  the OpenAI API [quickstart tutorial](https://beta.openai.com/docs/quickstart). It uses the [Next.js](https://nextjs.org/) framework with [React](https://reactjs.org/). Check out the tutorial or follow the instructions below to get set up.
 
-2. Clone this repository
+1) yarn install
 
-3. Navigate into the project directory
+2) Rename .env.example to .env and populate the variables.
 
-   ```bash
-   $ cd openai-quickstart-node
-   ```
+3) yarn build && yarn start
 
-4. Install the requirements
+4) Type a ticket title for a React component.
 
-   ```bash
-   $ npm install
-   ```
+E.g.  'Create Card component for Newskit Design System.' or...  'Create Card component'.
 
-5. Make a copy of the example environment variables file
 
-   On Linux systems: 
-   ```bash
-   $ cp .env.example .env
-   ```
-   On Windows:
-   ```powershell
-   $ copy .env.example .env
-   ```
-6. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file
+## ATTENTION
 
-7. Run the app
-
-   ```bash
-   $ npm run dev
-   ```
-
-You should now be able to access the app at [http://localhost:3000](http://localhost:3000)! For the full context behind this example app, check out the [tutorial](https://beta.openai.com/docs/quickstart).
+The Jira API call might fail. This depends by how your Jira software is set up. Ticket creation in your website might require extra custom fields, or information. So, the body of the request may need to change. I would suggest you to remove the custom field I have added, it is very specific to my Jira workspace.
